@@ -40,7 +40,7 @@ encourage movements involving acceleration or deceleration, such as sudden stops
 after spinning, swaying, and flapping sleeves. Our capturing equipment consists of
 10 DJI Osmo Action cameras, shooting at a frame rate of 100fps while synchronized
 with an audio signal. The final processed dataset records 10k frames of sequence
-from 6 subjects in total. Click [here] to download our I3D-Human Dataset.
+from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to download our I3D-Human Dataset.
 
 
 
