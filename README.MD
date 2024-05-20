@@ -1,4 +1,5 @@
 # Within the Dynamic Context: Inertia-aware 3D Human Modeling with Pose Sequence 
+### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://ai4sports.opengvlab.com/Dyco/)
 ## A. Prerequisite
 ### `Configure environment`
 Create and activate a virtual environment.
