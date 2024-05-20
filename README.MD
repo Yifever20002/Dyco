@@ -24,10 +24,6 @@ Copy the smpl model.
 ``````
 Follow [this page](https://github.com/vchoutas/smplx/tree/master/tools) to remove Chumpy objects from the SMPL model.
 
-If you are on GvLab-3090, you can directly link to or copy from chenyutong's directory.
-```
-cp /mnt/data/Gvlab/chenyutong/code/HumanNeRF_Sequence/third_parties/smpl/models/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl third_parties/smpl/models
-```
 ## B. Prepare dataset
 ### 1. Download and extract
     ```
