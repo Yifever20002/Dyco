@@ -43,22 +43,6 @@ with an audio signal. The final processed dataset records 10k frames of sequence
 from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to download our I3D-Human Dataset.
 
 
-
-### 3. [Optional] Extract CNN features  
-
-```
-export CUDA_VISIBLE_DEVICES=0
-DIRNAME=dataset/pjlab_mocap/xianbei_v1.0-
-for split in trainview_all
-do
-python tools/extract_features.py/compute_features.py \
-    --net resnet34 \
-    --output_dir ${DIRNAME}${split}/rgb_features/ \
-    --folder ${DIRNAME}${split}/
-done
-```
-The precomputed RGB features will be saved in dataset/pjlab_mocap/xianbei_v1.0-${split}/rgb_features/ and be loaded during training when needed.
-
 ## C. Train and Test
 
 ### 1. Baseline (See scripts/examples/baseline.sh)
