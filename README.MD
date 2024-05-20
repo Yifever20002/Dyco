@@ -46,37 +46,18 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 
 ## C. Train and Test
 
-### 1. Baseline (See scripts/examples/baseline.sh)
-```
-export CUDA_VISIBLE_DEVICES=0
-python train.py \
-    --cfg configs/human_nerf/xianbei_v1.0.yaml \
-    experiment baseline/humannerf_baseline
-    
-for type in movement novelview novelpose_autoregressive
-do
-python run.py \
-    --type ${type} \
-    --cfg configs/human_nerf/xianbei_v1.0.yaml \
-    experiment baseline/humannerf_baseline 
-done
+### Baseline
 
-```
+    sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf.sh
 
-### 2. + Conditions
-```
-# baseline, w/o extra condition input to canonical-mlp
-sh scripts/examples/baseline.sh 
+    sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf_test.sh
 
-# Input pose condition to canonical-mlp and offset-cmlp
-sh scripts/examples/pose_condition_len1.sh
+### + Conditions
 
-# Input pose-sequence condition to canonical-mlp and offset-cmlp
-sh scripts/examples/pose-seq_condition_len4.sh
+    sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta.sh
 
-# Input pose-delta condition to canonical-mlp and offset-mlp
-sh scripts/examples/pose-delta_condition_len4.sh
+    sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta_test.sh
 
-```
+
 
 
