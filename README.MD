@@ -19,7 +19,9 @@ Install the required packages.
 Copy the smpl model.
 
     SMPL_DIR=/path/to/smpl
+
     MODEL_DIR=$SMPL_DIR/smplify_public/code/models
+
     cp $MODEL_DIR/basicModel_neutral_lbs_10_207_0_v1.0.0.pkl third_parties/smpl/models
 
 Follow [this page](https://github.com/vchoutas/smplx/tree/master/tools) to remove Chumpy objects from the SMPL model.
