@@ -1,20 +1,19 @@
-# Sequence-conditioned HumanNeRF 
+# Within the Dynamic Context: Inertia-aware 3D Human Modeling with Pose Sequence 
 ## A. Prerequisite
 ### `Configure environment`
 Create and activate a virtual environment.
 
-    conda create --name humannerf python=3.7
-    conda activate humannerf
+    conda create --name Dyco python=3.7
+    conda activate Dyco
 
 Install the required packages.
 
     pip install -r requirements.txt
 
-
     pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 
+    pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 
-**Note** Some packages might be missed in the requirements.txt. 😄 Just pip install them when needed later.
 ### `Down SMPL model`
 
 Copy the smpl model.
