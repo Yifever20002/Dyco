@@ -34,27 +34,14 @@ Download the vgg.pth from [here](https://github.com/richzhang/PerceptualSimilari
 
     cp $VGG_DIR third_parties/lpips/weights/v0.1/
 
-## B. Prepare dataset
-### 1. Download and extract
-    ```
-    DATASET_NAME=xianbei_v1.0
-    cp -r /mnt/data/Gvlab/chenyutong/data/pjlab/xianbei_v1.0 data/
-    ```
-### 2. Prepare images and poses
-Generate the folder in dataset/pjlab_mocap/\${DATASET_NAME}-\${SPLIT} which contains
-* cameras.pkl - the camera intrinsics and extrinsics.
-* canonical_joints.pkl -  the joints' positions in the canonical pose.
-* frameid_pose.pkl - the Rh,Th,poses of each frame over the entire video
-* mesh_infos.pkl - the image/mask path and poses
-* images - the resized and cropped images
-* masks - the resized and cropped masks
-```
-cd tools/prepare_pjlab_mocap
-for split in train novelview novelpose
-do
-python prepare_dataset.py --cfg=xianbei_v1.0_crop-resize/xianbei_v1.0_${split}.yaml 
-done
-```
+## B. I3D-Human Dataset
+The I3D-Human Dataset focuses on capturing variations in clothing appearance under approximately identical poses. Compared with existing benchmarks, we outfit the subjects in loose clothing such as dresses and light jackets and
+encourage movements involving acceleration or deceleration, such as sudden stops
+after spinning, swaying, and flapping sleeves. Our capturing equipment consists of
+10 DJI Osmo Action cameras, shooting at a frame rate of 100fps while synchronized
+with an audio signal. The final processed dataset records 10k frames of sequence
+from 6 subjects in total. Click [here] to download our I3D-Human Dataset.
+
 
 
 ### 3. [Optional] Extract CNN features  
