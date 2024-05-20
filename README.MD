@@ -30,6 +30,10 @@ Follow [this page](https://github.com/vchoutas/smplx/tree/master/tools) to remov
 
 Download the vgg.pth from [here](https://github.com/richzhang/PerceptualSimilarity/tree/master/lpips/weights/v0.1).
 
+    VGG_DIR=/path/to/vgg.pth
+
+    cp $VGG_DIR third_parties/lpips/weights/v0.1/
+
 ## B. Prepare dataset
 ### 1. Download and extract
     ```
