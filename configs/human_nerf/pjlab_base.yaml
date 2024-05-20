@@ -1,0 +1,2 @@
+use_amp: True 
+localize_part2joints_file: tools/387_part2joints_more-local.npy

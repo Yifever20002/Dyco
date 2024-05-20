@@ -1,0 +1,26 @@
+use_amp: true
+localize_part2joints_file: tools/387_part2joints_more-local.npy
+task: zju_mocap
+subject: '393'
+experiment: standard_393
+train:
+  dataset_module: core.data.human_nerf.train
+  dataset: zju_393_standard_train
+  selected_frame: all
+movement:
+  dataset_module: core.data.human_nerf.train
+  dataset: zju_393_standard_train_render
+progress:
+  dataset_module: core.data.human_nerf.train
+  dataset: zju_393_standard_train
+novelpose:
+  dataset_module: core.data.human_nerf.train
+  dataset: zju_393_standard_novelpose
+novelview:
+  dataset_module: core.data.human_nerf.train
+  dataset: zju_393_standard_novelview
+bgcolor:
+- 0.0
+- 0.0
+- 0.0
+resize_img_scale: 0.5

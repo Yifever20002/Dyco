@@ -1,0 +1,49 @@
+use_amp: True 
+localize_part2joints_file: tools/387_part2joints_more-local.npy
+
+task: 'pjlab_mocap'
+subject: 'ID1_2'
+experiment: 'ID1_2'
+
+##############################################3
+## Data Configuration
+
+train:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-train'
+  selected_frame: all
+
+progress:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-train'
+
+movement:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-train_render'
+
+
+novelpose: 
+  dataset_module: 'core.data.human_nerf.train' 
+  dataset: 'ID1_2-novelpose'
+
+novelpose_autoregressive: 
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-novelpose-autoregressive'
+  eval_step: 1
+
+novelview:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-novelview'
+
+novelview_res:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'ID1_2-novelview_res'
+
+bgcolor: [0., 0., 0.]
+resize_img_scale: 1 #To Speed up dataloading, the image cropping-resizing and intrinsics adjustment is already done in prepare_dataset.py
+# crop_img_before_resize:
+#   topleft: [344,843]
+#   bottomright: [2392,2891]
+# resize_img_scale: 0.25 #!! This is really important
+
+

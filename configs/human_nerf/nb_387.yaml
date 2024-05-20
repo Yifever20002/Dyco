@@ -1,0 +1,55 @@
+task: 'zju_mocap'
+subject: 'p387'
+experiment: 'nb_split'
+
+##############################################3
+## Data Configuration
+
+train:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_4view_train'
+  selected_frame: all
+
+train_render:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_1view_test'
+
+progress:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_1view_test_progress'
+
+movement:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_1view_test'
+
+freeview: #TODO
+  dataset_module: 'core.data.human_nerf.freeview'
+  dataset: 'zju_387_test'
+
+tpose: #TODO
+  dataset_module: 'core.data.human_nerf.tpose'
+  dataset: 'zju_387_test'
+
+tpose_pose_condition: #TODO
+  dataset_module: 'core.data.human_nerf.tpose_pose_condition'
+  dataset: 'zju_387_test'
+
+novelpose: 
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_1view_novelpose'
+
+novelview:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_4view_novelview'
+
+novelpose_eval:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_4view_novelpose'
+
+novelpose_comb:
+  dataset_module: 'core.data.human_nerf.train'
+  dataset: 'zju_387_nb_rightlimb_32'
+
+
+bgcolor: [0., 0., 0.]
+resize_img_scale: 0.5

@@ -1,0 +1,398 @@
+category: 'human_nerf'
+random_seed: 42
+use_amp: True
+eval_step: 1
+ddp: True
+type: 'train'
+val_interval: 50
+resume: False
+frame_interval: 1
+flexible_testpath: ''
+
+crop_img_before_resize:
+  topleft: [-1,-1]
+  bottomright: [-1,-1]
+
+#######
+experiments:
+  color_perturbation: empty #or per-view 
+  color_perturbation_strength: strong
+  color_perturbation_according_to: camera
+
+##############################################3
+## Network Specs
+
+# modules
+network_module: 'core.nets.human_nerf.network'
+trainer_module: 'core.train.trainers.human_nerf.trainer'
+lr_updater_module: 'core.train.trainers.human_nerf.lr_updaters.exp_decay'
+optimizer_module: 'core.train.optimizers.human_nerf.optimizer'
+
+# positional embedder -- canonical mlp
+embedder:
+  module: "core.nets.human_nerf.embedders.fourier"
+
+# learnable embeddings for view directions or T
+vocab_embedder:
+  module: "core.nets.human_nerf.embedders.vocab_embedder"
+
+# positional embedder -- non-rigid motion mlp
+non_rigid_embedder:
+  module: "core.nets.human_nerf.embedders.hannw_fourier"
+
+# condition_code:
+#   type: global #local or local v2
+#   local:
+#     part2joints_file: empty
+#     fg_threshold: 0.2
+#     threshold: -1. # -1 stands for x directly. [0,1] stands for a threhold for binarization
+
+rgb_history:
+  test_novelpose: autoregressive #use_groundtruth
+  novelpose_image_dir: ''
+  novelpose_depth_dir: ''
+  length: 0
+  step: 1 # or 0
+  feature_name: 'resnet-scratch'  
+  precompute: empty #data/zju/CoreView_387/rgb_features/resnet34/layer-6 or empty
+  window_size: 16
+  feature_net:
+    out_chs: [64,128,256]
+    layers: [1,1,1] #[3,4,6,3]
+    inplanes: 64
+  view_selection: 'train_all' # if 'visible', depth_path is needed
+  depth_path: empty
+  visible_threshold: 0.03 #3cm
+  query_type: v1
+
+  
+localize_part2joints_file: tools/387_part2joints.npy
+
+quantized_pose_step: 360      # divide 360 into N steps
+quantized_deltapose_step: 360      # divide 360 into N steps
+
+# canonical mlp
+canonical_mlp:
+  module: 'core.nets.human_nerf.canonical_mlps.mlp_rgb_sigma'
+  triplane: True # By Yutong, for humannerf baseline, set to False
+  mlp_depth: 3         # layers in network
+  mlp_depth_plus: 0
+  mlp_width: 256       # channels per layer
+  multires: 10         # log2 of max freq for positional encoding (3D location)
+  i_embed: 0           # set 0 for default positional encoding, -1 for none
+  view_dir: False
+  view_embed: mlp #vocab or mlp
+  view_dir_camera_only: False
+  view_vocab_n: 4
+  view_vocab_dim: 27
+  pose_color: wo
+  pose_ch: 69
+  multires_dir: 4
+  last_linear_scale: 1
+  skips_all: False
+  # condition_code_dim: 0
+  # condition_code_encoder: none  #or input_encoder
+  # condition_code_delay: False
+  kick_in_iter: 10000
+  full_band_iter: 50000 
+  #***************************************
+  xyz_encoder: 
+    depth: 0
+    width: 256
+  #***************************************
+  pose_condition:
+    name: pose_condition
+    length: 0 #default no pose_condition
+    step: 1
+    representation: axis-angle # quarternion or rodrigues
+    quantize_type: Notuse
+    localize: 
+      enable: True
+      fg_threshold: 0.2
+    bg_condition: zero_output # zero the input to mlp or zero the output
+    network: PoseSeq_Encoder
+    PoseSeq_Encoder:
+      D1: -1 # -1 stands for turning off the dimension reduction mlp
+      D2: -1 # -1 stands for turning off the dimension reduction mlp
+  posedelta_condition:
+    name: posedelta_condition
+    length: 0
+    step: 1
+    deltastep: 5
+    representation: axis-angle
+    quantize_type: Notuse
+    localize:
+      enable: True 
+      fg_threshold: 0.2
+    bg_condition: zero_output 
+    network: PoseSeq_Encoder 
+    PoseSeq_Encoder:
+      D1: -1 # -1 stands for turning off the dimension reduction mlp
+      D2: -1 # -1 stands for turning off the dimension reduction mlp    
+  rgb_condition: #see rgb_history.***
+    input_layer: 0
+    network: RGBSeq_Encoder
+    RGBSeq_Encoder:
+      view_reduce: mean_after_mlp1
+      D1: 32 # -1 stands for turning off the dimension reduction mlp
+      D2: 32 # -1 stands for turning off the dimension reduction mlp
+
+# motion weights volume
+mweight_volume:
+  module: 'core.nets.human_nerf.mweight_vol_decoders.deconv_vol_decoder'
+  embedding_size: 256
+  volume_size: 32
+  dst_voxel_size: 0.0625
+
+posevec:
+  type: axis_angle
+# non-rigid motion mlp
+non_rigid_motion_mlp:
+  module: 'core.nets.human_nerf.non_rigid_motion_mlps.mlp_offset'
+  # condition_code_size: 69
+  pose_input: True 
+  # time_input: False 
+  # time_embed: vocab #vocab or sine
+  # time_vocab_n: 654 #vocab
+  # time_vocab_dim: 128 #vocab
+  # multires_time: 2 #sine
+  # time_dim:  128 #sine
+  mlp_width: 128
+  mlp_depth_plus: 0
+  mlp_depth: 2
+  skips: [1]
+  skips_all: False
+  multires: 6       # log2 of max freq for positional encoding (3D location)
+  i_embed: 0        # set 0 for default positional encoding, -1 for none
+  kick_in_iter: 10000
+  full_band_iter: 50000
+  last_linear_scale: 1
+  #***************************************
+  xyz_encoder: 
+    depth: 0
+    width: 256
+  #***************************************
+  pose_condition:
+    name: pose_condition
+    length: 1 #default one pose_condition
+    step: 1
+    representation: axis-angle # quarternion or rodrigues
+    quantize_type: Notuse
+    localize: 
+      enable: False # default global
+      fg_threshold: 0.2
+    bg_condition: zero_input # zero the input to mlp or zero the output
+    network: PoseSeq_Encoder
+    PoseSeq_Encoder:
+      D1: -1 # -1 stands for turning off the dimension reduction mlp
+      D2: -1 # -1 stands for turning off the dimension reduction mlp
+  posedelta_condition:
+    name: posedelta_condition
+    length: 0
+    deltastep: 5
+    step: 1
+    representation: axis-angle
+    quantize_type: Notuse
+    localize:
+      enable: True 
+      fg_threshold: 0.2
+    bg_condition: zero_output 
+    network: PoseSeq_Encoder 
+    PoseSeq_Encoder:
+      D1: -1 # -1 stands for turning off the dimension reduction mlp
+      D2: -1 # -1 stands for turning off the dimension reduction mlp 
+  #***************************************
+
+non_rigid_motion_model: mlp
+
+
+# pose decoder
+pose_decoder:
+  module: 'core.nets.human_nerf.pose_decoders.mlp_delta_body_pose'
+  embedding_size: 69
+  mlp_width: 256
+  mlp_depth: 4
+pose_decoder_off: False
+
+
+##############################################3
+## Data Configuration
+
+train_keyfilter: ['rays',
+                  'motion_bases', 'motion_weights_priors',
+                  'cnl_bbox', 'dst_posevec_69']
+test_keyfilter: ['rays', 'target_rgbs', 
+                 'motion_bases', 'motion_weights_priors',
+                  'cnl_bbox', 'dst_posevec_69']
+# pose_condition_file: empty
+# pose_condition_file_cmlp: empty
+# pose_condition_random_mask: empty
+# pose_condition_mask_prob: 0.5
+eval:
+  metrics: ["lpips", "psnr", "ssim"]
+
+train:
+  perturb: 1.        # only for training, set to 0. for no jitter, 1. for jitter
+  batch_size: 1
+  shuffle: True
+  drop_last: False
+  maxiter: 100000
+  lr: 0.0005  # 5e-4
+  lr_mweight_vol_decoder: 0.00005 # 5e-5
+  lr_pose_decoder: 0.00005        # 5e-5
+  lr_non_rigid_mlp: 0.00005       # 5e-5      # 5e-5
+  # lr_time_embed_fn: 0.00005
+  lrate_decay: 500
+  optimizer: 'adam'
+  log_interval: 100
+  save_checkpt_interval: 20000
+  save_model_interval: 50000
+  ray_shoot_mode: 'patch'
+  lossweights:
+    lpips: 1.0
+    mse: 0.2
+    l1: 0.0
+
+test:
+  head_id: -1
+  weight_threshold: 0.3
+  type: skip
+  save_3d: False
+  save_3d_together: False
+  save_depth: False
+
+train_render:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+progress:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+  dump_interval: 500000
+
+movement:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+stopwrun:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelview:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelview_res:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelview_all:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelpose:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelpose_autoregressive:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+  eval_step: 1
+
+novelpose_eval:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+novelpose_comb:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+freeview:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+  frame_idx: 0
+
+tpose:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+tpose_pose_condition:
+  batch_size: 1
+  shuffle: False
+  drop_last: False
+
+##############################################3
+## Misc
+
+sex: 'neutral'
+total_bones: 24
+bbox_offset: 0.3
+
+load_net: latest
+save_all: True    # save all checkpoints
+
+patch:
+  sample_subject_ratio: 0.8
+  N_patches: 6    ##ddp ?
+  size: 32      # [Patch] size of patch
+
+N_samples: 128      # number of samples for each ray in coarse ray matching
+
+perturb: 1.        # only for training, set to 0. for no jitter, 1. for jitter
+
+netchunk_per_gpu: 300000 # number of pts sent through network in parallel, decrease if running out of memory
+chunk: 32768   # 32768=1024*32, number of rays processed in parallel, decrease if running out of memory
+n_gpus: 1
+
+show_alpha: False  
+show_truth: False
+
+lpips:
+  lpips: True 
+  layers: [0,1,2,3,4]
+
+# multihead:
+#   split: view
+#   head_num: 1
+#   argmin_cfg:
+#     selector_criteria: 
+#       lpips: 1.0
+#       mse: 0.2
+#       ssim: 0.0 #
+#     unselected_lossweights: # for those unselected head
+#       lpips: 0.0
+#       mse: 0.0
+
+modules:
+  pretrained_path: empty
+  canonical_mlp:
+    reinit: False
+    tune: False
+    tune_last: -1
+  non_rigid_motion_mlp: 
+    reinit: False
+    tune: False
+  pose_decoder: 
+    reinit: False
+    tune: False
+  mweight_vol_decoder:
+    reinit: False
+    tune: False
+
+  
+
+
+
