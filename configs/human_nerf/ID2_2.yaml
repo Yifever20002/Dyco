@@ -1,7 +1,7 @@
 use_amp: True 
 localize_part2joints_file: tools/387_part2joints_more-local.npy
 
-task: 'pjlab_mocap'
+task: 'I3D-Human'
 subject: 'ID2_2'
 experiment: 'ID2_2'
 
