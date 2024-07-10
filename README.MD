@@ -2,17 +2,20 @@
 ### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://ai4sports.opengvlab.com/Dyco/)
 ## A. Prerequisite
 ### `Configure environment`
-Create and activate a virtual environment.
+Create a virtual environment and install the required packages 
+For Cuda11.3:
 
-    conda create --name Dyco python=3.7
-    conda activate Dyco
-
-Install the required packages.
-
-    pip install -r requirements.txt
-
+    conda create --name Dyco python=3.7 && conda activate Dyco
     pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113
 
+For Cuda11.8:
+
+    conda create --name Dyco python=3.8 && conda activate Dyco
+    pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
+
+Install other requirements:
+
+    pip install -r requirements.txt
     pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 
 ### `Download SMPL model`
@@ -35,7 +38,7 @@ Download the vgg.pth from [here](https://github.com/richzhang/PerceptualSimilari
 
     cp $VGG_DIR third_parties/lpips/weights/v0.1/
 
-## B. I3D-Human Dataset
+## B. Experiments on I3D-Human Dataset
 The I3D-Human Dataset focuses on capturing variations in clothing appearance under approximately identical poses. Compared with existing benchmarks, we outfit the subjects in loose clothing such as dresses and light jackets and
 encourage movements involving acceleration or deceleration, such as sudden stops
 after spinning, swaying, and flapping sleeves. Our capturing equipment consists of
@@ -45,20 +48,43 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
-## C. Train and Test
+### Train and Test
 
-### Baseline
+#### Baseine
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf.sh
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf_test.sh
 
-### + Conditions
+#### + Conditions
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta.sh
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta_test.sh
 
+## C. Experiments on ZJU-MoCap Dataset
+### Data preparation
+1. Fill in the [form](https://docs.google.com/forms/d/1QcTp5qIbIBn8PCT-EQgG-fOB4HZ9khpRkT3q2OnH2bs) to download the dataset.
+2. Create a soft link:
+
+ln -s /path/to/zju_mocap data/zju
+
+3. Preprocess: 
+Take Subject-390 for example
+
+    tar -xvf CoreView_390.tar.gz
+
+    cd tools/prepare_zju_mocap
+
+    python prepare_dataset.py --cfg=configs/390_train.yaml
+
+    python prepare_dataset.py --cfg=configs/390_novelview.yaml
+
+    python prepare_dataset.py --cfg=configs/390_novelpose.yaml
+
+4. Training
+5. Inference (TODO)
+6. DME evaluation
 
 
 
