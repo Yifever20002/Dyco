@@ -3,6 +3,7 @@
 ## A. Prerequisite
 ### `Configure environment`
 Create a virtual environment and install the required packages 
+
 For Cuda11.3:
 
     conda create --name Dyco python=3.7 && conda activate Dyco
@@ -59,7 +60,6 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 #### + Conditions
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta.sh
-
     sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta_test.sh
 
 ## C. Experiments on ZJU-MoCap Dataset
@@ -67,19 +67,15 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 1. Fill in the [form](https://docs.google.com/forms/d/1QcTp5qIbIBn8PCT-EQgG-fOB4HZ9khpRkT3q2OnH2bs) to download the dataset.
 2. Create a soft link:
 
-ln -s /path/to/zju_mocap data/zju
+    ln -s /path/to/zju_mocap data/zju
 
 3. Preprocess: 
 Take Subject-390 for example
 
     tar -xvf CoreView_390.tar.gz
-
     cd tools/prepare_zju_mocap
-
     python prepare_dataset.py --cfg=configs/390_train.yaml
-
     python prepare_dataset.py --cfg=configs/390_novelview.yaml
-
     python prepare_dataset.py --cfg=configs/390_novelpose.yaml
 
 4. Training
