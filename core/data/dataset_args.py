@@ -3,300 +3,300 @@ from configs import cfg
 class DatasetArgs(object):
     dataset_attrs = {}
 
-    if cfg.category == 'human_nerf' and cfg.task == 'pjlab_mocap':
+    if cfg.category == 'human_nerf' and cfg.task == 'I3D-Human':
         dataset_attrs.update({
             ##ID1_1
             f"ID1_1-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID1_1-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID1_1-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID1_1-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID1_1-novelview_res": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-novelview_hres",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-novelview_hres",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID1_1-novelview-stop": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-stop",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-stop",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID1_1-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID1_1-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_1-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_1-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
             
             
             ##ID1_2
             f"ID1_2-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID1_2-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID1_2-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID1_2-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID1_2-novelview_res": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-novelview_hres",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-novelview_hres",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID1_2-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID1_2-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID1_2-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID1_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID1_2-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID1_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
 
             ##ID2_1
             f"ID2_1-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID2_1-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID2_1-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID2_1-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID2_1-novelview_res": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-novelview_hres",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-novelview_hres",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID2_1-novelview-stop": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-stop",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-stop",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID2_1-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID2_1-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_1-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_1-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             ##ID2_2
             f"ID2_2-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID2_2-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID2_2-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID2_2-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID2_2-novelview-stop": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-stop",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-stop",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID2_2-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID2_2-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID2_2-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID2_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID2_2-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID2_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             ##ID3_1
             f"ID3_1-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID3_1-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID3_1-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID3_1-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID3_1-novelview_res": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-novelview_hres",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-novelview_hres",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID3_1-novelview-stop": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-stop",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-stop",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID3_1-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID3_1-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_1-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_1-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_1-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_1-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             ##ID3_2
             f"ID3_2-train": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.train_keyfilter,
             "ray_shoot_mode": cfg.train.ray_shoot_mode}, # for train
 
             f"ID3_2-train_render": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID3_2-movement": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-train",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "select_views": [0], "skip":4}, # for novelview
 
             f"ID3_2-novelview": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-novelview",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-novelview",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',}, # for novelview
 
             f"ID3_2-novelview-stop": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-stop",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-stop",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image',
             "skip":1, "maxframes": -1}, # for train
 
             f"ID3_2-novelpose": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-novelpose",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-novelpose",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
             f"ID3_2-novelpose-autoregressive": {
-            "dataset_path": f"../dataset/pjlab_mocap/ID3_2-novelpose-autoregressive",
-            "train_dataset_path": f"../dataset/pjlab_mocap/ID3_2-train",
+            "dataset_path": f"../dataset/I3D-Human/ID3_2-novelpose-autoregressive",
+            "train_dataset_path": f"../dataset/I3D-Human/ID3_2-train",
             "keyfilter": cfg.test_keyfilter,
             "ray_shoot_mode": 'image'}, # for novelpose
 
