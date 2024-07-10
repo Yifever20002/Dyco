@@ -101,11 +101,11 @@ def compute_ssim(pred, target, mask=None):
         target = target[y : y + h, x : x + w]
     try:
         ssim = structural_similarity(
-            pred.cpu().numpy(), target.cpu().numpy(), channel_axis=-1
+            pred.cpu().numpy(), target.cpu().numpy(), channel_axis=-1, data_range=1,
         )
     except ValueError:
         ssim = structural_similarity(
-            pred.cpu().numpy(), target.cpu().numpy(), multichannel=True
+            pred.cpu().numpy(), target.cpu().numpy(), multichannel=True, data_range=1,
         )
     return ssim
 
