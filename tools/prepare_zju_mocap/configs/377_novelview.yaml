@@ -1,0 +1,31 @@
+dataset:
+  zju_mocap_path: ../../data/zju
+  subject: '377'
+  sex: neutral
+views:
+- 1
+- 2
+- 3
+- 4
+- 5
+- 7
+- 8
+- 9
+- 10
+- 11
+- 13
+- 14
+- 15
+- 16
+- 17
+- 19
+- 20
+- 21
+- 22
+start_end:
+- 0
+- 300
+interval: 30
+output:
+  dir: ../../dataset/zju_mocap/standard/377
+  name: 377_novelview

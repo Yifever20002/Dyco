@@ -1,0 +1,11 @@
+dataset:
+  zju_mocap_path: ../../data/zju
+  subject: '315'
+  sex: 'neutral'
+
+views: [0,6,12,18]
+start_end: [0,400]
+
+output:
+  dir: ../../dataset/zju_mocap/standard/315
+  name: '315_train'

@@ -1,0 +1,16 @@
+dataset:
+  zju_mocap_path: ../../data/zju
+  subject: '390'
+  sex: neutral
+views:
+- 0
+- 6
+- 12
+- 18
+start_end:
+- 700
+- 1000
+output:
+  dir: ../../dataset/zju_mocap/standard/390
+  name: 390_train
+interval: 1

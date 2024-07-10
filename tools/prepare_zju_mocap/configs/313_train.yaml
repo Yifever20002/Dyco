@@ -1,0 +1,16 @@
+dataset:
+  zju_mocap_path: ../../data/zju
+  subject: '313'
+  sex: neutral
+views:
+- 0
+- 6
+- 12
+- 18
+start_end:
+- 0
+- 60
+output:
+  dir: ../../dataset/zju_mocap/standard/313
+  name: 313_train
+interval: 1

@@ -1,0 +1,12 @@
+dataset:
+  zju_mocap_path: ../../data/zju
+  subject: '315'
+  sex: 'neutral'
+
+views:  [1,2,3,4,5,7,8,9,10,11,13,14,15,16,17,19,20]
+start_end: [0,400]
+interval: 30
+
+output:
+  dir: ../../dataset/zju_mocap/standard/315
+  name: '315_novelview'
