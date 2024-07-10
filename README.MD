@@ -54,7 +54,6 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 #### Baseine
 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf.sh
-
     sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf_test.sh
 
 #### + Conditions
@@ -63,6 +62,7 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
     sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta_test.sh
 
 ## C. Experiments on ZJU-MoCap Dataset
+
 ### Data preparation
 1. Fill in the [form](https://docs.google.com/forms/d/1QcTp5qIbIBn8PCT-EQgG-fOB4HZ9khpRkT3q2OnH2bs) to download the dataset.
 2. Create a soft link:
@@ -70,6 +70,7 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
     ln -s /path/to/zju_mocap data/zju
 
 3. Preprocess: 
+
 Take Subject-390 for example
 
     tar -xvf CoreView_390.tar.gz
@@ -78,9 +79,9 @@ Take Subject-390 for example
     python prepare_dataset.py --cfg=configs/390_novelview.yaml
     python prepare_dataset.py --cfg=configs/390_novelpose.yaml
 
-4. Training
-5. Inference (TODO)
-6. DME evaluation
+### Training
+###Inference (TODO)
+DME evaluation
 
 
 
