@@ -25,7 +25,9 @@ import torch.multiprocessing as mp
 
 def load_network():
     model = create_network()
-    ckpt_path = os.path.join(cfg.logdir, f'{cfg.load_net}.tar')
+    latest = max((f for f in os.listdir(cfg.logdir) if f.startswith('iter_') and f.endswith('.tar')),
+                   key=lambda x: int(x.split('_')[1].split('.')[0]), default=None)
+    ckpt_path = os.path.join(cfg.logdir, latest)
     # ckpt_path = os.path.join(cfg.logdir, f'iter_40000.tar')
     ckpt = torch.load(ckpt_path, map_location='cuda:0')
     # print(model.state_dict().keys())
