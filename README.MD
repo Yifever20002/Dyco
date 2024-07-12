@@ -83,14 +83,13 @@ to get the per-subject score reported in our paper:
 ## C. Experiments on ZJU-MoCap Dataset
 
 ### Data preparation
-1. Fill in the [form](https://docs.google.com/forms/d/1QcTp5qIbIBn8PCT-EQgG-fOB4HZ9khpRkT3q2OnH2bs) to download the dataset.
-2. Create a soft link:
+Fill in the [form](https://docs.google.com/forms/d/1QcTp5qIbIBn8PCT-EQgG-fOB4HZ9khpRkT3q2OnH2bs) to download the dataset.
+
+Create a soft link:
 
     ln -s /path/to/zju_mocap data/zju
 
-3. Preprocess: 
-
-Take Subject-390 for example
+Then preprocess the data. Take Subject-390 for example:
 
     tar -xvf CoreView_390.tar.gz
     cd tools/prepare_zju_mocap
