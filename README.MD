@@ -49,6 +49,15 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
+| Data    | Novel Views |            |            | Novel Poses |            |            |
+|---------|-------------|------------|------------|-------------|------------|------------|
+|         | PSNR        | SSIM       | LPIPS      | PSNR        | SSIM       | LPIPS      |
+| ID1_1   | 31.31       | 0.9747     | 29.66      | 30.34       | 0.9706     | 34.41      |
+| ID1_2   | 31.2        | 0.9731     | 32.67      | 30.45       | 0.971      | 33.19      |
+| ID2_1   | 29.8        | 0.9742     | 35.24      | 27.91       | 0.9653     | 45.44      |
+| ID3_1   | 32.57       | 0.9733     | 40.6       | 31.77       | 0.9694     | 45.17      |
+| Average | 31.22       | 0.9738     | 34.54      | 30.12       | 0.9691     | 39.55      |
+
 ### Train and Test
 
 #### Baseine
