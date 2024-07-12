@@ -49,7 +49,24 @@ from 6 subjects in total. Click [here](https://drive.google.com/drive/folders/1b
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
-Per-subject score reported in our paper:
+
+### Train and Test
+
+#### Baseine
+
+    sh scripts/I3DHuman/ID1_1/ID1_1_humannerf.sh
+    sh scripts/I3DHuman/ID1_1/ID1_1_humannerf_test.sh
+
+#### + Conditions
+
+    sh scripts/I3DHuman/ID1_1/ID1_1_posedelta.sh
+    sh scripts/I3DHuman/ID1_1/ID1_1_posedelta_test.sh
+
+You can also download our pretrained models [here](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing). Just put the "experiments" under /path/to/Dyco/experiments and you can simply run
+
+    sh scripts/I3DHuman/ID1_1/ID1_1_posedelta_test.sh
+
+to get the per-subject score reported in our paper:
 
 |         | Novel Views |        |       | Novel Poses |        |       |
 |:-------:|:-----------:|:------:|:-----:|:-----------:|:------:|:-----:|
@@ -59,18 +76,6 @@ Per-subject score reported in our paper:
 | ID2_1   |    29.80    | 0.9742 | 35.24 |    27.91    | 0.9653 | 45.44 |
 | ID3_1   |    32.57    | 0.9733 | 40.60 |    31.77    | 0.9694 | 45.17 |
 | Average |    31.22    | 0.9738 | 34.54 |    30.12    | 0.9691 | 39.55 |
-
-### Train and Test
-
-#### Baseine
-
-    sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf.sh
-    sh scripts/pjlab_mocap/ID1_1/ID1_1_humannerf_test.sh
-
-#### + Conditions
-
-    sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta.sh
-    sh scripts/pjlab_mocap/ID1_1/ID1_1_posedelta_test.sh
 
 ## C. Experiments on ZJU-MoCap Dataset
 
