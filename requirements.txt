@@ -5,3 +5,4 @@ absl-py
 scikit-image
 imageio-ffmpeg 
 wandb
+attrdict
