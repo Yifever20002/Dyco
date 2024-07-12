@@ -49,6 +49,8 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
+Per-subject score reported in our paper:
+
 |         | Novel Views |        |       | Novel Poses |        |       |
 |:-------:|:-----------:|:------:|:-----:|:-----------:|:------:|:-----:|
 |   Data  |     PSNR    |  SSIM  | LPIPS |     PSNR    |  SSIM  | LPIPS |
