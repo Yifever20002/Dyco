@@ -102,7 +102,7 @@ def create_dataloader(data_type='train', **kwargs):
         num_workers = cfg.num_workers
         worker_init_fn = _worker_init_fn
     if use_DDP:
-        sampler = DistributedSampler(dataset)
+        sampler = DistributedSampler(dataset, shuffle=shuffle)
         data_loader = torch.utils.data.DataLoader(dataset=dataset,
                                                 batch_size=batch_size,
                                                 drop_last=drop_last,
