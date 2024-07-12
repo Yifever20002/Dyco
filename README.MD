@@ -1,5 +1,5 @@
 # Within the Dynamic Context: Inertia-aware 3D Human Modeling with Pose Sequence 
-### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://ai4sports.opengvlab.com/Dyco/)
+### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing)
 ## A. Prerequisite
 ### `Configure environment`
 Create a virtual environment and install the required packages 
@@ -45,7 +45,7 @@ encourage movements involving acceleration or deceleration, such as sudden stops
 after spinning, swaying, and flapping sleeves. Our capturing equipment consists of
 10 DJI Osmo Action cameras, shooting at a frame rate of 100fps while synchronized
 with an audio signal. The final processed dataset records 10k frames of sequence
-from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to download our I3D-Human Dataset and copy it to /path/to/Dyco's parent/dataset/.
+from 6 subjects in total. Click [here](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing) to download our I3D-Human Dataset and copy it to /path/to/Dyco's parent/dataset/.
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
