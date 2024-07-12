@@ -49,7 +49,7 @@ from 6 subjects in total. Click [here](https://github.com/Yifever20002/Dyco) to 
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/dataset.png)
 
-| Data    | Novel Views |            |            | Novel Poses |            |            |
+| Data    |               Novel Views             |               Novel Poses             |
 |---------|-------------|------------|------------|-------------|------------|------------|
 |         | PSNR        | SSIM       | LPIPS      | PSNR        | SSIM       | LPIPS      |
 | ID1_1   | 31.31       | 0.9747     | 29.66      | 30.34       | 0.9706     | 34.41      |
