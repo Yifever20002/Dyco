@@ -97,6 +97,8 @@ class Dataset(torch.utils.data.Dataset):
 
         
         self.views = self.get_total_views()
+        # Sorted by (view, frame)
+        self.framelist = sorted(self.framelist, key=lambda x: self.get_frame_camera(x)[::-1])
         custom_print(f'Views:{self.views}')
         custom_print(f'Views in the training set:{self.train_views}')
 
