@@ -39,6 +39,9 @@ Download the vgg.pth from [here](https://github.com/richzhang/PerceptualSimilari
 
     cp $VGG_DIR third_parties/lpips/weights/v0.1/
 
+### `Download RAFT model`
+    cd RAFT && ./download_models.sh
+
 ## B. Experiments on I3D-Human Dataset
 The I3D-Human Dataset focuses on capturing variations in clothing appearance under approximately identical poses. Compared with existing benchmarks, we outfit the subjects in loose clothing such as dresses and light jackets and
 encourage movements involving acceleration or deceleration, such as sudden stops
