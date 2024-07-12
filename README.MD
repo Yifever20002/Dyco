@@ -99,8 +99,7 @@ Take Subject-390 for example
     python prepare_dataset.py --cfg=configs/390_novelpose.yaml
 
 ### Training
-###Inference (TODO)
-DME evaluation
+### Inference
 
 
 
