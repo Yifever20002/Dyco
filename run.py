@@ -28,22 +28,8 @@ def load_network():
     latest = max((f for f in os.listdir(cfg.logdir) if f.startswith('iter_') and f.endswith('.tar')),
                    key=lambda x: int(x.split('_')[1].split('.')[0]), default=None)
     ckpt_path = os.path.join(cfg.logdir, latest)
-    # ckpt_path = os.path.join(cfg.logdir, f'iter_40000.tar')
     ckpt = torch.load(ckpt_path, map_location='cuda:0')
-    # print(model.state_dict().keys())
-    # assert False
-    '''
-    load_dict = {}
-    current_dict = model.state_dict()
-    for k,v in ckpt['network'].items():
-        if current_dict[k].shape == v.shape:
-            load_dict[k] = v 
-        else:
-            print(f'Shape mismatch, {k}')
-    model.load_state_dict(load_dict, strict=False)
-    '''
-    # print(ckpt['network'].keys())
-    # assert False
+
     model.load_state_dict(ckpt['network'], strict=False)
     custom_print('load network from ', ckpt_path)
     if cfg['ddp']:
@@ -94,10 +80,6 @@ def _freeview(
     writer = ImageWriter(
         output_dir=os.path.join(cfg.logdir, cfg.load_net+cfg.eval_output_tag),
         exp_name=render_folder_name)
-    # metrics_writer = MetricsWriter(
-    #     output_dir=os.path.join(cfg.logdir, cfg.load_net+cfg.eval_output_tag), 
-    #     exp_name=render_folder_name,
-    #     dataset=cfg[render_folder_name].dataset)
 
     model.eval()
     step = 0
@@ -193,12 +175,8 @@ def run_novelpose_autoregressive():
     if cfg.rgb_history.length>0:
         cfg.eval_output_tag = '-'+cfg.rgb_history.test_novelpose
         if cfg.rgb_history.test_novelpose=='autoregressive':
-            cfg.rgb_history.precompute = 'empty' # Reset precompute to empty, so we can compute features online
+            cfg.rgb_history.precompute = 'empty' 
             cfg.test.save_depth = True
-        #     cfg.eval_step = cfg.novelpose_autoregressive.eval_step
-        #     run_movement(render_folder_name='novelpose_autoregressive')
-        # elif cfg.rgb_history.test_novelpose=='oracle':
-        #     run_movement(render_folder_name='novelpose')
         run_movement(render_folder_name='novelpose_autoregressive')
     else:
         run_movement(render_folder_name='novelpose_autoregressive')
@@ -207,11 +185,9 @@ def run_novelpose():
     cfg.show_truth = True
     if cfg.rgb_history.length>0:
         if cfg.rgb_history.test_novelpose=='autoregressive':
-            cfg.rgb_history.precompute = 'empty' # Reset precompute to empty, so we can compute features online    
-            # cfg.eval_step = cfg.novelpose_autoregressive.eval_step
+            cfg.rgb_history.precompute = 'empty'     
             cfg.novelpose.dataset += '_autoregressive'
             cfg.test.save_depth = True
-        #     run_movement(render_folder_name='novelpose_autoregressive')
         elif cfg.rgb_history.test_novelpose=='oracle':
             cfg.eval_output_tag = '-'+cfg.rgb_history.test_novelpose
         else:
@@ -278,14 +254,6 @@ def run_movement(render_folder_name='movement'):
                 batch[k] = [[v2[0] for v2 in v1] for v1 in v]
             else:
                 batch[k] = v[0]
-        # if not '72' in batch['frame_name']:
-        #     continue
-        # import ipdb; ipdb.set_trace()
-        # img_ray_d = torch.zeros([512,512,3],device='cuda',dtype=torch.float32)
-        # ray_mask = batch['ray_mask'].reshape([512,512])
-        # img_ray_d[ray_mask] = batch['rays'][1,:,:].float().cuda()
-        # pos_on_image = (ray_mask).nonzero().to('cuda')
-        # pos_to_ri = (ray_mask.view(-1).cumsum(0)-1).view(512,512)
         data = cpu_data_to_gpu(
                     batch,
                     exclude_keys=EXCLUDE_KEYS_TO_GPU + ['target_rgbs','frame_name_history'])
@@ -302,101 +270,8 @@ def run_movement(render_folder_name='movement'):
         cnl_xyzs, cnl_rgbs, cnl_weights = [net_output['cnl_xyz']],[net_output['cnl_rgb']], [net_output['cnl_weight']]
         img_names = [None] 
 
-            # import ipdb; ipdb.set_trace()
-            # i = backward_motion_weights[...,15].argmax()
-            # ri, pi = int(torch.floor(i/128).item()), (i%128).item()
-            # print(backward_motion_weights[ri,pi])
-            # print(rgbs[0][ri])
-            # print('ofs ',offsets[0][ri,pi])
-            # print('rgb-pt', rgb_on_rays[0][ri,pi])
-            # print('rgb accumu', rgbs[0][ri])
-            # import ipdb; ipdb.set_trace()
-            # #&&&&&&&&
-            # ray_mask = batch['ray_mask']
-            # alpha_img = np.zeros([512,512],dtype=np.uint8)
-            # alpha_img[ray_mask.view(512,512).cpu().numpy()] = alphas[0].cpu().numpy()
-            # alpha_img[ray_mask.view(512,512).cpu().numpy()] = np.clip(alphas[0].cpu().numpy()*255,0,255)
-            # import cv2
-            # sid2ri = ray_mask.cumsum(0)-1
-            # hw2ri = sid2ri.reshape(512,512)
-            # cv2.imwrite('debug_output/alpha_144.png',alpha_img)
-            # alphaonly_img = np.zeros([512,512],dtype=np.uint8)
-            # alphaonly_img[ray_mask.view(512,512).cpu().numpy()] = np.clip(net_output['alpha_only'].cpu().numpy()*255,0,255) 
-            # cv2.imwrite('debug_output/alphaonly_144.png',alphaonly_img)
-            # fgonly_img = np.zeros([512,512],dtype=np.uint8)
-            # fgonly_img[ray_mask.view(512,512).cpu().numpy()] = np.clip(net_output['fg_mask_only'].cpu().numpy()*255,0,255) 
-            # cv2.imwrite('debug_output/fgonly_144.png',fgonly_img)            
-            # #&&&&&&&&
-        '''
-        ### TRACK
-        tmp_uvs = net_output['tmp_uvs']
-        pii = backward_motion_weights[...,18].argmax() #number in the valid rays
-        ri, pi = pii//128, pii%128
-        uvs_warped = tmp_uvs[ri,pi,:,:,[1,0]].reshape(-1,2).long() #t*v,2
-        ray_mask = batch['ray_mask']
-        pos_on_image = (ray_mask.view((512, 512))).nonzero().to(weights_on_rays[0].device)
-        tmp_features = net_output['tmp_features']
-        features_input = batch['rgb_history'] #(T,V,H,W,D)
-        def draw_point(frame_name, xys, output_path):
-            import cv2
-            img = cv2.resize(cv2.imread(f'data/zju/CoreView_387/{frame_name}'), (512,512))
-            import matplotlib
-            cmap = matplotlib.cm.get_cmap('Spectral')
-            for i,xy in enumerate(xys):
-                r = int(cmap(i/len(xys))[2]*255)
-                g = int(cmap(i/len(xys))[1]*255)
-                b = int(cmap(i/len(xys))[0]*255)
-                img = cv2.circle(img, xy, radius=8, color=[r,g,b])
-            cv2.imwrite(output_path, img)
-            return
-        u, v = pos_on_image[ri][0],pos_on_image[ri][1]
-        fn = batch['frame_name']
-        draw_point(fn, [(v.item(),u.item())], f'debug_output/112-lelbow_{fn.replace("/","-")}')
-        print(f'{batch["frame_name"]}:{[u.item(),v.item()]}->x_c->')
-        for ii,(u,v) in enumerate(uvs_warped):
-            ti, vi = math.floor(ii/4),ii%4
-            fn = batch["frame_name_history"][ti][vi]
-            print(f'{fn}: {[u.item(),v.item()]}', end='\t')
-            value1 = features_input[ti, vi, u, v,:]
-            value2 = tmp_features[ri,pi,ti,vi]
-            print(f'from input: {value1.cpu().numpy()} / from output {value2.cpu().numpy()}')
-            draw_point(fn, [(v.item(),u.item())],f'debug_output/112-lelbow_{fn.replace("/","-")}')
-        import ipdb; ipdb.set_trace()
-
-        output_dir = os.path.join('debug_output/track')
-        os.makedirs(output_dir, exist_ok=True)
-        lbs_on_weights = torch.sum(backward_motion_weights*weights_on_rays[0][...,None],dim=1)
-        ris = lbs_on_weights.argmax(dim=0).cpu().numpy()[3:]
-        pos_on_image = (batch['ray_mask'].view((512, 512))).nonzero().numpy().astype(np.int32) #N,2
-        def draw_point(frame_name, xys, output_path):
-            import cv2
-            img = cv2.resize(cv2.imread(f'data/zju/CoreView_387/{frame_name}'), (512,512))
-            import matplotlib
-            cmap = matplotlib.cm.get_cmap('Spectral')
-            for i,xy in enumerate(xys):
-                r = int(cmap(i/len(xys))[2]*255)
-                g = int(cmap(i/len(xys))[1]*255)
-                b = int(cmap(i/len(xys))[0]*255)
-                img = cv2.circle(img, tuple(xy), radius=8, color=[r,g,b])
-            cv2.imwrite(output_path, img)
-            return
-
-        draw_point(batch['frame_name'], pos_on_image[ris][:,[1,0]], os.path.join(output_dir, batch['frame_name'].replace('/','-')))
-        uvs = torch.sum(net_output['correspondence_uv']*weights_on_rays[0][...,None,None,None], dim=1).cpu().numpy() #N_ray, num_history, num_view, 2
-        uvs = uvs[ris]
-        import ipdb; ipdb.set_trace()
-        for ti in range(uvs.shape[1]):
-            for vi in range(uvs.shape[2]):
-                draw_point(batch['frame_name_history'][ti][vi], uvs[:,ti,vi,:], 
-                            os.path.join(output_dir, batch['frame_name_history'][ti][vi].replace('/','-')))
-        '''
-
-        # import ipdb; ipdb.set_trace()
         for hid,(rgb, alpha, depth, cnl_xyz, cnl_rgb, cnl_weight, weights_on_ray, xyz_on_ray, rgb_on_ray, offset_on_ray, img_name) in \
                 enumerate(zip(rgbs, alphas, depths, cnl_xyzs, cnl_rgbs, cnl_weights, weights_on_rays, xyz_on_rays, rgb_on_rays, offsets, img_names)):
-
-            if os.environ.get('RETURN_POSE','False').lower()=='true':
-                pose_refine_output[batch['frame_name']] = net_output['POSE']
             width = batch['img_width']
             height = batch['img_height']
             ray_mask = batch['ray_mask']
@@ -420,10 +295,9 @@ def run_movement(render_folder_name='movement'):
                     gather_alpha = gather_together(alpha_img)
                     gather_truth = gather_together(truth_img)
                     gather_name = gather_together(batch['frame_name'])
-
                     if get_local_rank() == 0:
                         for i in range(len(gather_rgb)):
-                            metrics_writer.append(name=gather_name[i], pred=gather_rgb[i], target=gather_truth[i], mask=None)
+                            metrics_writer.append(name=gather_name[i].replace('/','-'), pred=gather_rgb[i], target=gather_truth[i], mask=None)
                             imgs = [gather_rgb[i]]
                             if cfg.show_truth:
                                 imgs.append(gather_truth[i])
@@ -436,19 +310,6 @@ def run_movement(render_folder_name='movement'):
                     img_out = np.concatenate(imgs, axis=1)
                     writer.append(img_out, img_name=batch['frame_name'].replace('/','-'))
             
-            #reproject to 3D image
-            '''
-            depth_img = unpack_alpha_map(alpha_vals=depth.data.cpu().numpy(), ray_mask=ray_mask, width=width, height=height)
-            weight_img = unpack_weight_map(weight_vals=weight.data.cpu().numpy(), ray_mask=ray_mask, width=width, height=height)
-            point_3ds, point_3ds_mask = test_loader.dataset.project_to_world3D(
-                depth_img, batch['frame_name'], height, width,
-                ray_mask=ray_mask, near=batch['near'], far=batch['far'])
-            writer.append_3d(point_3ds, point_3ds_mask, obj_name=batch['frame_name'].replace('/','-'), 
-                    weight_img=weight_img, depth_img=depth_img)
-            '''
-            
-            #back to 3d-canonical
-            #weight.argmax() -> rgb/density/(x,y,z)
             if cfg.test.save_depth:
                 depth_img = unpack_alpha_map(alpha_vals=depth.data.cpu().numpy(), ray_mask=ray_mask, width=width, height=height)
                 writer.append_depth(depth_img, img_name=batch['frame_name'])
@@ -474,14 +335,6 @@ def run_movement(render_folder_name='movement'):
 
 
             if cfg.test.save_3d:
-                '''
-                weight_mask = (weights_on_ray.max(axis=1)[0]>cfg.test.weight_threshold) #R,N -> R,
-                xyzs = torch.sum(xyz_on_ray[weight_mask]*weights_on_ray[weight_mask][...,None],axis=1) #R,N,3*R,N,1 ->R,N
-                rgbs = torch.sum(rgb_on_ray[weight_mask]*weights_on_ray[weight_mask][...,None],axis=1) #R,N,3*R,N,1 ->R,N
-                #cnl_xyz, cnl_rgb = xyz_on_ray[weight_mask].data.cpu().numpy(), rgb_on_ray[weight_mask].data.cpu().numpy()
-                writer.append_cnl_3d(xyzs.data.cpu().numpy(), rgbs.data.cpu().numpy(), 
-                    obj_name=batch['frame_name'].replace('/','-')+f'-cnl-t{cfg.test.weight_threshold}')
-                '''
                 pos_on_image = (ray_mask.view((height, width))).nonzero() #N_rays, 2
                 rgb_on_image = batch['target_rgbs'] #N_rays, 3
                 writer.save_pkl({'weights_on_rays':weights_on_ray.data.cpu().numpy(), 
@@ -491,13 +344,6 @@ def run_movement(render_folder_name='movement'):
                              'pos_on_image':pos_on_image.data.cpu().numpy(),
                              'offset_on_rays':offset_on_ray.data.cpu().numpy(),
                              'cnl_xyz':cnl_xyz.data.cpu().numpy()}, name=batch['frame_name'].replace('/','-')+'-rays.pkl')
-
-
-                '''
-                weight_mask = (cnl_weight>cfg.test.weight_threshold)
-                cnl_xyz, cnl_rgb = cnl_xyz[weight_mask].data.cpu().numpy(), cnl_rgb[weight_mask].data.cpu().numpy()
-                writer.append_cnl_3d(cnl_xyz, cnl_rgb, obj_name=batch['frame_name'].replace('/','-')+'-cnl')
-                '''
 
     if cfg['ddp']:
         if get_local_rank() == 0:
@@ -522,10 +368,6 @@ def gather_together(data):
 
         
 if __name__ == '__main__':
-    # cfg['ddp'] = False
     cfg['type'] = args.type
-    # cfg['pose_decoder_off'] = True
-    # cfg['eval_output_tag'] = '_1.5'
-    # initialize DDP environment
     init_env(cfg)
     globals()[f'run_{args.type}']()
