@@ -5,7 +5,7 @@ from core.utils.network_util import set_requires_grad
 from configs import cfg
 from skimage.metrics import structural_similarity
 from collections import defaultdict
-
+from core.utils.DME_util import DME_Computer
 class MetricsWriter(object):
     def __init__(self, output_dir, exp_name, dataset, lpips_computer=None):
         os.makedirs(output_dir, exist_ok=True)
@@ -28,7 +28,8 @@ class MetricsWriter(object):
             "lpips": lambda pred, target, mask: 1000*self.lpips_computer.compute_lpips(pred=pred.cuda(), target=target.cuda()).item(), 
             "ssim": lambda pred, target, mask: compute_ssim(pred, target, mask).item()
         }
-
+        
+        self.dme_computer = DME_Computer()
         self.N = 0
 
     def normalize(self, img):
@@ -41,7 +42,7 @@ class MetricsWriter(object):
     def append(self, name, pred, target, mask=None):
         
         if name in self.name2metrics:
-            return
+            return #already computed
         else:
             self.N += 1
             pred, target = self.normalize(pred), self.normalize(target)
@@ -52,14 +53,20 @@ class MetricsWriter(object):
                 self.name2metrics[name][k] = self.metrics_func[k](pred, target, mask)
                 self.metrics2ave[k] += self.name2metrics[name][k]
                 self.per_img_f.writelines('{}-{:.4f} '.format(k, self.name2metrics[name][k]))
+            
+            #DME
+            dme = self.dme_computer.append(target, pred, name)
+            if dme is not None:
+                self.per_img_f.writelines(f'DME-{dme:.4f} ')
+                self.name2metrics[name]['dme'] = dme
             self.per_img_f.writelines('\n')   
 
     def finalize(self):
 
-        self.metrics2ave = {k:v/self.N for k,v in self.metrics2ave.items()}      
+        self.metrics2ave = {k:v/self.N for k,v in self.metrics2ave.items() if not k == 'dme'}      
+        self.metrics2ave['dme'] = self.dme_computer.finalize()
         for k, v in self.metrics2ave.items():
             self.average_f.writelines(f'{k[0]}:{v:.4f}\n') 
-
         self.per_img_f.close()
         self.average_f.close()
 
