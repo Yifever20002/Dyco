@@ -1,5 +1,12 @@
 # Within the Dynamic Context: Inertia-aware 3D Human Modeling with Pose Sequence 
 ### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing)
+
+>KFD-NeRF: Rethinking Dynamic NeRF with Kalman Filter\
+>[Yifan Zhan](https://yifever20002.github.io/), Zhuoxiao Li, [Muyao Niu](https://myniuuu.github.io/), [Zhihang Zhong](https://zzh-tech.github.io/),  Shohei Nobuhara, Ko Nishino, Yinqiang Zheng\
+>European Conference on Computer Vision (ECCV), 2024
+
+![image](https://github.com/Yifever20002/KFD-NeRF/blob/main/images/pipeline.PNG)
+
 ## A. Prerequisite
 ### `Configure environment`
 Create a virtual environment and install the required packages 
