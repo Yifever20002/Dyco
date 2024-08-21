@@ -104,8 +104,12 @@ Then preprocess the data. Take Subject-390 for example:
     python prepare_dataset.py --cfg=configs/390_novelview.yaml
     python prepare_dataset.py --cfg=configs/390_novelpose.yaml
 
-### Training
-### Inference
+### Train and Test
+
+#### + Conditions
+
+    sh scripts/zju_mocap/313/313_posedelta.sh
+    sh scripts/zju_mocap/313/313_posedelta_test.sh
 
 
 
