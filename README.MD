@@ -5,7 +5,7 @@
 >Yutong Chen, [Yifan Zhan](https://yifever20002.github.io/), [Zhihang Zhong](https://zzh-tech.github.io/),  Wei Wang, Xiao Sun, Yu Qiao, Yinqiang Zheng\
 >European Conference on Computer Vision (ECCV), 2024
 
-![image](https://github.com/Yifever20002/KFD-NeRF/blob/main/images/pipeline.PNG)
+![image](https://github.com/Yifever20002/Dyco/blob/main/images/Dyco.PNG)
 
 ## A. Prerequisite
 ### `Configure environment`
