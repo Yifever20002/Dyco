@@ -64,13 +64,13 @@ from 6 subjects in total. Click [here](https://drive.google.com/drive/folders/1b
 
 #### Baseine
 
-    sh scripts/I3DHuman/ID1_1/ID1_1_humannerf.sh
-    sh scripts/I3DHuman/ID1_1/ID1_1_humannerf_test.sh
+    sh scripts/I3D-Human/ID1_1/ID1_1_humannerf.sh
+    sh scripts/I3D-Human/ID1_1/ID1_1_humannerf_test.sh
 
 #### + Conditions
 
-    sh scripts/I3DHuman/ID1_1/ID1_1_posedelta.sh
-    sh scripts/I3DHuman/ID1_1/ID1_1_posedelta_test.sh
+    sh scripts/I3D-Human/ID1_1/ID1_1_posedelta.sh
+    sh scripts/I3D-Human/ID1_1/ID1_1_posedelta_test.sh
 
 You can also download our pretrained models [here](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing). Just put the "experiments" under /path/to/Dyco/experiments and you can simply run
 
