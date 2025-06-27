@@ -2,7 +2,7 @@
 ### [Project Page](https://ai4sports.opengvlab.com/Dyco/) | [Paper](https://arxiv.org/abs/2403.19160) | [Data](https://drive.google.com/drive/folders/1bj1pmr_FZE5ClR5ZCWpXD79ESaM8Ivvg?usp=sharing)
 
 >Within the Dynamic Context: Inertia-aware 3D Human Modeling with Pose Sequence\
->Yutong Chen, [Yifan Zhan](https://yifever20002.github.io/), [Zhihang Zhong](https://zzh-tech.github.io/),  Wei Wang, Xiao Sun, Yu Qiao, Yinqiang Zheng\
+>Yutong Chen, [Yifan Zhan](https://yifever20002.github.io/yifanzhan.github.io/), [Zhihang Zhong](https://zzh-tech.github.io/),  Wei Wang, Xiao Sun, Yu Qiao, Yinqiang Zheng\
 >European Conference on Computer Vision (ECCV), 2024
 
 ![image](https://github.com/Yifever20002/Dyco/blob/main/images/Dyco.PNG)
